@@ -1,23 +1,31 @@
+import sqlite3
 
-import sqlite3  
+conn = sqlite3.connect('kullanici_veritabani.db')
+cursor = conn.cursor()
 
-baglanti = sqlite3.connect("kullanicilar.db")
-imlec = baglanti.cursor()
+cursor.execute('''
+CREATE TABLE IF NOT EXISTS kullanicilar (
+    id INTEGER PRIMARY KEY,
+    kullanici_adi TEXT,
+    sifre TEXT
+)
+''')
 
-imlec.execute("CREATE TABLE IF NOT EXISTS kullanicilar (id INTEGER PRIMARY KEY, kullanici_adi TEXT, sifre TEXT)")
+cursor.execute("INSERT INTO kullanicilar (kullanici_adi, sifre) VALUES ('admin', 'admin123')")
+conn.commit()
 
-def giris_yap(kullanici_adi):
-    sorgu = f"SELECT * FROM kullanicilar WHERE kullanici_adi = '{kullanici_adi}'"
-    print("SQL Sorgusu:", sorgu)  # Hata ayıklama için sorguyu ekrana yazdır
-    imlec.execute(sorgu)
-    return imlec.fetchall()
-  
-kullanici_girdisi = input("Kullanıcı adını girin: ")
-sonuc = giris_yap(kullanici_girdisi)
+def kullanici_giris():
+    kullanici_adi = input("Kullanıcı adını girin: ")
+    sifre = input("Şifreyi girin: ")
 
-if sonuc:
-    print("Kullanıcı bulundu:", sonuc)
-else:
-    print("Kullanıcı bulunamadı!")
+    query = f"SELECT * FROM kullanicilar WHERE kullanici_adi = '{kullanici_adi}' AND sifre = '{sifre}'"
+    cursor.execute(query)
 
-baglanti.close()
+    if cursor.fetchone():
+        print("Giriş başarılı!")
+    else:
+        print("Kullanıcı bulunamadı!")
+
+kullanici_giris()
+
+conn.close()
