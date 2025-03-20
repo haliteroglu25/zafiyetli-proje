@@ -1,0 +1,30 @@
+import sqlite3  
+
+baglanti = sqlite3.connect("kullanicilar.db")
+imlec = baglanti.cursor()
+
+imlec.execute("""
+    CREATE TABLE IF NOT EXISTS kullanicilar (
+        id INTEGER PRIMARY KEY AUTOINCREMENT, 
+        kullanici_adi TEXT UNIQUE, 
+        sifre TEXT
+    )
+""")
+
+kullanicilar = [
+    ("admin", "admin123"),
+    ("user1", "password1"),
+    ("user2", "password2"),
+    ("hacker", "letmein"),
+]
+
+for kullanici in kullanicilar:
+    try:
+        imlec.execute("INSERT INTO kullanicilar (kullanici_adi, sifre) VALUES (?, ?)", kullanici)
+    except sqlite3.IntegrityError:
+        pass  # Eğer kullanıcı zaten varsa, hata vermesin
+
+baglanti.commit()
+baglanti.close()
+
+print("Veritabanı oluşturuldu ve kullanıcılar eklendi.")
