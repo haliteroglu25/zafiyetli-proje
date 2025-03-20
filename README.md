@@ -14,3 +14,4 @@ Bu projede bir SQL Injection güvenlik açığı ve düzeltilmiş versiyonu bulu
 
 ## Demo Videosu
 Aşağıdaki videoda zafiyetin nasıl istismar edildiği ve güvenli versiyonun nasıl çalıştığı gösterilmektedir.
+https://youtu.be/vgASZQ0mLuY
