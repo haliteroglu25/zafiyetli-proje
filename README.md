@@ -6,7 +6,8 @@ Bu projede bir SQL Injection güvenlik açığı ve düzeltilmiş versiyonu bulu
 
 ##  Zafiyetli Kod (zafiyetli_kod.py)
 - **Zafiyet:** SQL Injection (OWASP A03:2021 - Injection)  
-- **Zafiyetin CVSS Skoru:** 9.8 (Kritik)  
+- **Zafiyetin CVSS Skoru:** 9.8 (Kritik)
+- **Vector String:** CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H
 - **Exploit Vektörü:** Kullanıcı girişine zararlı SQL kodları eklenebilir.  
 
 ##  Güvenli Kod (guvenli_kod.py)
